@@ -11,8 +11,19 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'github/copilot.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-lsp'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'deoplete-plugins/deoplete-lsp'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
 Plug 'ionide/Ionide-vim'
 Plug 'ncm2/float-preview.nvim'
 call plug#end()
@@ -28,24 +39,103 @@ set shellquote= shellxquote=
 let mapleader = ","
 lua require("hop").setup { keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 }
 lua <<EOF
+
 require("toggleterm").setup{
-  open_mapping = [[<c-a>]],
+  open_mapping = [[<c-t>]],
   start_in_insert = true,
   terminal_mappings = true,
   shell = "pwsh.exe"
 }
+
 require("telescope").load_extension "file_browser"
+
+-- Set up nvim-cmp.
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+    end,
+  },
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }, 
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Set configuration for specific filetype.
+-- cmp.setup.filetype('gitcommit', {
+--   sources = cmp.config.sources({
+--     { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+--   }, {
+--     { name = 'buffer' },
+--   })
+-- })
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+
+
+-- Set up lspconfig.
+local setup = function(server)
+  server.setup {
+    autostart = true,
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    capabilities = capabilities
+  }
+end
+local lspconfig = require('lspconfig')
+setup(require('ionide'))
 EOF
-let g:deoplete#enable_at_startup = 1
+
+" let g:deoplete#enable_at_startup = 1
+" 
+" Required: to be used with nvim-cmp.
+"
+let g:fsharp#lsp_auto_setup = 0
+let g:fsharp#exclude_project_directories = ['paket-files']
+
 set completeopt+=preview
-" let g:python3_host_prog = '~/Miniconda/python3.exe'
 
 map <Leader><Leader>w :HopWordAC<Enter>
 map <Leader><Leader>b :HopWordBC<Enter>
 map <Leader><Leader>j :HopLineAC<Enter>
 map <Leader><Leader>k :HopLineBC<Enter>
-map <Leader>a <cmd>ToggleTerm direction=horizontal<cr>
-map <Leader>o <cmd>ToggleTerm direction=float<cr>
+map <Leader>t <cmd>ToggleTerm direction=horizontal<cr>
+map <Leader>s <cmd>ToggleTerm direction=float<cr>
 
 " Find files using Telescope command-line sugar
 "
