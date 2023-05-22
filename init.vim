@@ -32,7 +32,9 @@ call plug#end()
 
 
 set splitbelow
-set shell=pwsh
+if has("win32")
+  set shell=pwsh
+endif
 let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
 let &shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait'
 let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
@@ -46,7 +48,7 @@ require("toggleterm").setup{
   open_mapping = [[<c-t>]],
   start_in_insert = true,
   terminal_mappings = true,
-  shell = "pwsh.exe"
+  shell = vim.o.shell
 }
 
 require("telescope").load_extension "file_browser"
