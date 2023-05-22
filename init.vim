@@ -26,6 +26,8 @@ Plug 'hrsh7th/vim-vsnip'
 
 Plug 'ionide/Ionide-vim'
 Plug 'ncm2/float-preview.nvim'
+
+Plug 'purescript-contrib/purescript-vim'
 call plug#end()
 
 
@@ -119,6 +121,21 @@ local setup = function(server)
 end
 local lspconfig = require('lspconfig')
 setup(require('ionide'))
+
+require'lspconfig'.purescriptls.setup {
+  -- Your personal on_attach function referenced before to include
+  -- keymaps & other ls options
+  autostart = true,
+  on_attach = on_attach,
+  settings = {
+    purescript = {
+      addSpagoSources = true -- e.g. any purescript language-server config here
+    }
+  },
+  flags = {
+    debounce_text_changes = 150,
+  }
+}
 EOF
 
 " let g:deoplete#enable_at_startup = 1
@@ -127,6 +144,9 @@ EOF
 "
 let g:fsharp#lsp_auto_setup = 0
 let g:fsharp#exclude_project_directories = ['paket-files']
+
+let g:purescript_disable_indent = 1
+let g:purescript_unicode_conceal_enable = 1
 
 set completeopt+=preview
 
