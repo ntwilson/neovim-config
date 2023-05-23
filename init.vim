@@ -9,6 +9,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'github/copilot.vim'
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -29,11 +30,37 @@ Plug 'ncm2/float-preview.nvim'
 
 Plug 'purescript-contrib/purescript-vim'
 
-Plug 'nyoom-engineering/oxocarbon.nvim'
+" Plug 'nyoom-engineering/oxocarbon.nvim'
+" Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+" Plug 'ellisonleao/gruvbox.nvim'
+" Plug 'rktjmp/lush.nvim'
+" Plug 'uloco/bluloco.nvim'
 call plug#end()
 
 
 set splitbelow
+
+set number
+set ignorecase
+set expandtab
+set autowriteall
+
+set noswapfile
+set noundofile
+set nobackup
+set belloff=all
+
+set path=$PWD\**
+set wildignore+=**\node_modules\**
+
+" ~/.vim/vimrc
+" 
+set exrc
+set secure
+
+set encoding=utf-8
+colorscheme slate
+
 if has("win32")
   set shell=pwsh
   let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
@@ -51,12 +78,13 @@ require("toggleterm").setup{
   start_in_insert = true,
   hide_numbers = true,
   terminal_mappings = true,
-  shell = vim.o.shell,
-  shade_terminals = true,
-  shading_factor = '-30'
+  shell = vim.o.shell
 }
 
 require("telescope").load_extension "file_browser"
+require("nvim-tree").setup()
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Set up nvim-cmp.
 local cmp = require'cmp'
@@ -144,9 +172,6 @@ require'lspconfig'.purescriptls.setup {
   }
 }
 
-vim.opt.background = "dark" -- set this to dark or light
-vim.cmd("colorscheme oxocarbon")
-
 EOF
 
 " let g:deoplete#enable_at_startup = 1
@@ -174,7 +199,7 @@ map <leader>ff <cmd>Telescope find_files<cr>
 map <leader>fg <cmd>Telescope live_grep<cr>
 map <leader>fb <cmd>Telescope buffers<cr>
 map <leader>fh <cmd>Telescope help_tags<cr>
-map <leader>fe <cmd>Telescope file_browser<cr>
+map <leader>fe <cmd>NvimTreeToggle<cr>
 
 map gh <cmd>lua vim.lsp.buf.hover()<cr>
 map gd <cmd>lua vim.lsp.buf.definition()<cr>
@@ -188,26 +213,6 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 tmap <C-j> <C-\><C-n><C-w>j
 tmap <C-k> <C-\><C-n><C-w>k
-
-set number
-set ignorecase
-set expandtab
-set autowriteall
-
-set noswapfile
-set noundofile
-set nobackup
-set belloff=all
-
-set path=$PWD\**
-set wildignore+=**\node_modules\**
-
-" ~/.vim/vimrc
-" 
-set exrc
-set secure
-
-set encoding=utf-8
 
 
 " Use the internal diff if available.
