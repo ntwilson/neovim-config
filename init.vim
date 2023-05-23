@@ -34,11 +34,11 @@ call plug#end()
 set splitbelow
 if has("win32")
   set shell=pwsh
+  let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+  let &shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait'
+  let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+  set shellquote= shellxquote=
 endif
-let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
-let &shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait'
-let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-set shellquote= shellxquote=
 
 let mapleader = ","
 lua require("hop").setup { keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 }
@@ -47,6 +47,7 @@ lua <<EOF
 require("toggleterm").setup{
   open_mapping = [[<c-t>]],
   start_in_insert = true,
+  hide_numbers = true,
   terminal_mappings = true,
   shell = vim.o.shell
 }
@@ -138,6 +139,7 @@ require'lspconfig'.purescriptls.setup {
     debounce_text_changes = 150,
   }
 }
+
 EOF
 
 " let g:deoplete#enable_at_startup = 1
@@ -185,7 +187,7 @@ set path=$PWD\**
 set wildignore+=**\node_modules\**
 
 " ~/.vim/vimrc
-"
+" 
 set exrc
 set secure
 
@@ -194,6 +196,8 @@ set encoding=utf-8
 
 " Use the internal diff if available.
 " Otherwise use the special 'diffexpr' for Windows.
+"
+"
 if &diffopt !~# 'internal'
   set diffexpr=MyDiff()
 endif
