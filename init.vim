@@ -29,6 +29,8 @@ Plug 'ionide/Ionide-vim'
 Plug 'ncm2/float-preview.nvim'
 
 Plug 'purescript-contrib/purescript-vim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'folke/trouble.nvim'
 
 " Plug 'nyoom-engineering/oxocarbon.nvim'
 " Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
@@ -42,6 +44,8 @@ set splitbelow
 
 set number
 set ignorecase
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set autowriteall
 
@@ -208,11 +212,11 @@ map <leader>fb <cmd>Telescope buffers<cr>
 map <leader>fh <cmd>Telescope help_tags<cr>
 map <leader>fe <cmd>NvimTreeToggle<cr>
 
-map gh <cmd>lua vim.lsp.buf.hover()<cr>
+map K <cmd>lua vim.lsp.buf.hover()<cr>
 map gd <cmd>lua vim.lsp.buf.definition()<cr>
 map gs <cmd>lua vim.lsp.buf.signature_help()<cr>
 map gD <cmd>lua vim.lsp.buf.type_definition()<cr>
-
+map <leader><leader>t <cmd>TroubleToggle<cr>
 
 
 " Use the internal diff if available.
