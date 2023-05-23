@@ -177,6 +177,7 @@ map gD <cmd>lua vim.lsp.buf.type_definition()<cr>
 set number
 set ignorecase
 set expandtab
+set autowriteall
 
 set noswapfile
 set noundofile
