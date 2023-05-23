@@ -190,7 +190,7 @@ map <Leader><Leader>w :HopWordAC<Enter>
 map <Leader><Leader>b :HopWordBC<Enter>
 map <Leader><Leader>j :HopLineAC<Enter>
 map <Leader><Leader>k :HopLineBC<Enter>
-map <Leader>th <cmd>ToggleTerm direction=horizontal<cr>
+map <Leader>tt <cmd>ToggleTerm direction=horizontal<cr>
 map <Leader>to <cmd>ToggleTerm direction=float<cr>
 nmap <leader>ts <cmd>ToggleTermSendCurrentLine 1<cr>
 vmap <leader>ts <cmd>ToggleTermSendVisualSelection 1<cr>
