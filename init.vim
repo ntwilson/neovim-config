@@ -190,8 +190,15 @@ map <Leader><Leader>w :HopWordAC<Enter>
 map <Leader><Leader>b :HopWordBC<Enter>
 map <Leader><Leader>j :HopLineAC<Enter>
 map <Leader><Leader>k :HopLineBC<Enter>
-map <Leader>t <cmd>ToggleTerm direction=horizontal<cr>
-map <Leader>s <cmd>ToggleTerm direction=float<cr>
+map <Leader>th <cmd>ToggleTerm direction=horizontal<cr>
+map <Leader>to <cmd>ToggleTerm direction=float<cr>
+nmap <leader>ts <cmd>ToggleTermSendCurrentLine 1<cr>
+vmap <leader>ts <cmd>ToggleTermSendVisualSelection 1<cr>
+tmap <esc> <C-\><C-n>
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+tmap <C-j> <C-\><C-n><C-w>j
+tmap <C-k> <C-\><C-n><C-w>k
 
 " Find files using Telescope command-line sugar
 "
@@ -206,13 +213,6 @@ map gd <cmd>lua vim.lsp.buf.definition()<cr>
 map gs <cmd>lua vim.lsp.buf.signature_help()<cr>
 map gD <cmd>lua vim.lsp.buf.type_definition()<cr>
 
-nmap <C-h> <cmd>ToggleTermSendCurrentLine 1<cr>
-vmap <C-h> <cmd>ToggleTermSendVisualSelection 1<cr>
-tmap <esc> <C-\><C-n>
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-tmap <C-j> <C-\><C-n><C-w>j
-tmap <C-k> <C-\><C-n><C-w>k
 
 
 " Use the internal diff if available.
