@@ -28,6 +28,8 @@ Plug 'ionide/Ionide-vim'
 Plug 'ncm2/float-preview.nvim'
 
 Plug 'purescript-contrib/purescript-vim'
+
+Plug 'nyoom-engineering/oxocarbon.nvim'
 call plug#end()
 
 
@@ -51,7 +53,7 @@ require("toggleterm").setup{
   terminal_mappings = true,
   shell = vim.o.shell,
   shade_terminals = true,
-  shading_factor = '30'
+  shading_factor = '-30'
 }
 
 require("telescope").load_extension "file_browser"
@@ -141,6 +143,9 @@ require'lspconfig'.purescriptls.setup {
     debounce_text_changes = 150,
   }
 }
+
+vim.opt.background = "dark" -- set this to dark or light
+vim.cmd("colorscheme oxocarbon")
 
 EOF
 
