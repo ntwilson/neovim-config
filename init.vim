@@ -49,7 +49,9 @@ require("toggleterm").setup{
   start_in_insert = true,
   hide_numbers = true,
   terminal_mappings = true,
-  shell = vim.o.shell
+  shell = vim.o.shell,
+  shade_terminals = true,
+  shading_factor = '30'
 }
 
 require("telescope").load_extension "file_browser"
@@ -173,6 +175,14 @@ map gh <cmd>lua vim.lsp.buf.hover()<cr>
 map gd <cmd>lua vim.lsp.buf.definition()<cr>
 map gs <cmd>lua vim.lsp.buf.signature_help()<cr>
 map gD <cmd>lua vim.lsp.buf.type_definition()<cr>
+
+nmap <C-h> <cmd>ToggleTermSendCurrentLine 1<cr>
+vmap <C-h> <cmd>ToggleTermSendVisualSelection 1<cr>
+tmap <esc> <C-\><C-n>
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+tmap <C-j> <C-\><C-n><C-w>j
+tmap <C-k> <C-\><C-n><C-w>k
 
 set number
 set ignorecase
