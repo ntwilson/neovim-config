@@ -204,6 +204,8 @@ map <C-k> <C-w>k
 tmap <C-j> <C-\><C-n><C-w>j
 tmap <C-k> <C-\><C-n><C-w>k
 
+inoremap <Esc> <Esc>:w<CR>
+
 " Find files using Telescope command-line sugar
 "
 map <leader>ff <cmd>Telescope find_files<cr>
