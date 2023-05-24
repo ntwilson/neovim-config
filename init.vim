@@ -190,10 +190,10 @@ let g:purescript_unicode_conceal_enable = 1
 
 set completeopt+=preview
 
-map <Leader><Leader>w :HopWordAC<Enter>
-map <Leader><Leader>b :HopWordBC<Enter>
-map <Leader><Leader>j :HopLineAC<Enter>
-map <Leader><Leader>k :HopLineBC<Enter>
+map <Leader><Leader>w <cmd>HopWordAC<cr>
+map <Leader><Leader>b <cmd>HopWordBC<cr>
+map <Leader><Leader>j <cmd>HopLineAC<cr>
+map <Leader><Leader>k <cmd>HopLineBC<cr>
 map <Leader>tt <cmd>ToggleTerm direction=horizontal<cr>
 map <Leader>to <cmd>ToggleTerm direction=float<cr>
 nmap <leader>ts <cmd>ToggleTermSendCurrentLine 1<cr>
@@ -205,6 +205,8 @@ tmap <C-j> <C-\><C-n><C-w>j
 tmap <C-k> <C-\><C-n><C-w>k
 
 inoremap <Esc> <Esc>:w<CR>
+set updatetime=2000
+au CursorHold * :update
 
 " Find files using Telescope command-line sugar
 "
