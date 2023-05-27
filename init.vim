@@ -105,7 +105,8 @@ map <leader>ff <cmd>Telescope find_files hidden=true<cr>
 map <leader>fg <cmd>Telescope live_grep hidden=true<cr>
 map <leader>fb <cmd>Telescope buffers hidden=true<cr>
 map <leader>fh <cmd>Telescope help_tags hidden=true<cr>
-map <leader>fe <cmd>NvimTreeToggle<cr>
+map <leader>fe <cmd>Telescope file_browser hidden=true<cr>
+map <leader>fd <cmd>NvimTreeToggle<cr>
 
 map K <cmd>lua vim.lsp.buf.hover()<cr>
 map gd <cmd>lua vim.lsp.buf.definition()<cr>
@@ -238,7 +239,7 @@ let g:fsharp#lsp_auto_setup = 0
 let g:fsharp#exclude_project_directories = ['paket-files']
 
 let g:purescript_disable_indent = 1
-let g:purescript_unicode_conceal_enable = 1
+let g:purescript_unicode_conceal_enable = 0
 
 
 
