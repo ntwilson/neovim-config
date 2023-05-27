@@ -31,6 +31,10 @@ Plug 'ncm2/float-preview.nvim'
 Plug 'purescript-contrib/purescript-vim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
+Plug 'chrisbra/unicode.vim'
+
+Plug 'kosayoda/nvim-lightbulb'
+Plug 'antoinemadec/FixCursorHold.nvim'
 
 " Plug 'nyoom-engineering/oxocarbon.nvim'
 " Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
@@ -48,6 +52,7 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set autowriteall
+set nowrap
 
 set noswapfile
 set noundofile
@@ -74,8 +79,47 @@ if has("win32")
 endif
 
 let mapleader = ","
-lua require("hop").setup { keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 }
+
+set completeopt+=preview
+
+map <Leader><Leader>w <cmd>HopWordAC<cr>
+map <Leader><Leader>b <cmd>HopWordBC<cr>
+map <Leader><Leader>j <cmd>HopLineAC<cr>
+map <Leader><Leader>k <cmd>HopLineBC<cr>
+map <Leader>tt <cmd>ToggleTerm direction=horizontal<cr>
+map <Leader>to <cmd>ToggleTerm direction=float<cr>
+nmap <leader>ts <cmd>ToggleTermSendCurrentLine 1<cr>
+vmap <leader>ts <cmd>ToggleTermSendVisualSelection 1<cr>
+tmap <esc> <C-\><C-n>
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+tmap <C-j> <C-\><C-n><C-w>j
+tmap <C-k> <C-\><C-n><C-w>k
+
+set updatetime=2000
+au CursorHold * :update
+
+" Find files using Telescope command-line sugar
+"
+map <leader>ff <cmd>Telescope find_files hidden=true<cr>
+map <leader>fg <cmd>Telescope live_grep hidden=true<cr>
+map <leader>fb <cmd>Telescope buffers hidden=true<cr>
+map <leader>fh <cmd>Telescope help_tags hidden=true<cr>
+map <leader>fe <cmd>NvimTreeToggle<cr>
+
+map K <cmd>lua vim.lsp.buf.hover()<cr>
+map gd <cmd>lua vim.lsp.buf.definition()<cr>
+map gD <cmd>tab split<cr> gd
+
+map gh <cmd>lua vim.lsp.buf.type_definition()<cr>
+map gH <cmd>tab split<cr> gh
+map gs <cmd>lua vim.lsp.buf.signature_help()<cr>
+map <leader>. <cmd>lua vim.lsp.buf.code_action()<cr>
+map <leader><leader>t <cmd>TroubleToggle<cr>
+
 lua <<EOF
+
+require("hop").setup { keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 }
 
 require("toggleterm").setup{
   open_mapping = [[<c-t>]],
@@ -86,7 +130,13 @@ require("toggleterm").setup{
 }
 
 require("telescope").load_extension "file_browser"
-require("nvim-tree").setup()
+require("nvim-tree").setup {
+  live_filter = {
+    prefix = "[FILTER]: ",
+    always_show_folders = false, -- Turn into false from true by default
+  }
+}
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -176,6 +226,8 @@ require'lspconfig'.purescriptls.setup {
   }
 }
 
+require('nvim-lightbulb').setup({autocmd = {enabled = true}})
+
 EOF
 
 " let g:deoplete#enable_at_startup = 1
@@ -188,39 +240,6 @@ let g:fsharp#exclude_project_directories = ['paket-files']
 let g:purescript_disable_indent = 1
 let g:purescript_unicode_conceal_enable = 1
 
-set completeopt+=preview
-
-map <Leader><Leader>w <cmd>HopWordAC<cr>
-map <Leader><Leader>b <cmd>HopWordBC<cr>
-map <Leader><Leader>j <cmd>HopLineAC<cr>
-map <Leader><Leader>k <cmd>HopLineBC<cr>
-map <Leader>tt <cmd>ToggleTerm direction=horizontal<cr>
-map <Leader>to <cmd>ToggleTerm direction=float<cr>
-nmap <leader>ts <cmd>ToggleTermSendCurrentLine 1<cr>
-vmap <leader>ts <cmd>ToggleTermSendVisualSelection 1<cr>
-tmap <esc> <C-\><C-n>
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-tmap <C-j> <C-\><C-n><C-w>j
-tmap <C-k> <C-\><C-n><C-w>k
-
-inoremap <Esc> <Esc>:w<CR>
-set updatetime=2000
-au CursorHold * :update
-
-" Find files using Telescope command-line sugar
-"
-map <leader>ff <cmd>Telescope find_files<cr>
-map <leader>fg <cmd>Telescope live_grep<cr>
-map <leader>fb <cmd>Telescope buffers<cr>
-map <leader>fh <cmd>Telescope help_tags<cr>
-map <leader>fe <cmd>NvimTreeToggle<cr>
-
-map K <cmd>lua vim.lsp.buf.hover()<cr>
-map gd <cmd>lua vim.lsp.buf.definition()<cr>
-map gs <cmd>lua vim.lsp.buf.signature_help()<cr>
-map gD <cmd>lua vim.lsp.buf.type_definition()<cr>
-map <leader><leader>t <cmd>TroubleToggle<cr>
 
 
 " Use the internal diff if available.
