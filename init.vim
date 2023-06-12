@@ -88,8 +88,8 @@ map <Leader><Leader>j <cmd>HopLineAC<cr>
 map <Leader><Leader>k <cmd>HopLineBC<cr>
 map <Leader>tt <cmd>ToggleTerm direction=horizontal<cr>
 map <Leader>to <cmd>ToggleTerm direction=float<cr>
-nmap <leader>ts <cmd>ToggleTermSendCurrentLine 1<cr>
-vmap <leader>ts <cmd>ToggleTermSendVisualSelection 1<cr>
+nnoremap <leader>ts <cmd>ToggleTermSendCurrentLine 1<cr>
+vnoremap <leader>ts <cmd>ToggleTermSendVisualSelection 1<cr>
 tmap <esc> <C-\><C-n>
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -110,13 +110,12 @@ map <leader>fd <cmd>NvimTreeToggle<cr>
 
 map K <cmd>lua vim.lsp.buf.hover()<cr>
 map gd <cmd>lua vim.lsp.buf.definition()<cr>
-map gD <cmd>tab split<cr> gd
 
 map gh <cmd>lua vim.lsp.buf.type_definition()<cr>
-map gH <cmd>tab split<cr> gh
 map gs <cmd>lua vim.lsp.buf.signature_help()<cr>
 map <leader>. <cmd>lua vim.lsp.buf.code_action()<cr>
 map <leader><leader>t <cmd>TroubleToggle<cr>
+map <leader>s <cmd>tab split<cr>
 
 lua <<EOF
 
