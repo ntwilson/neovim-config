@@ -116,6 +116,7 @@ map gs <cmd>lua vim.lsp.buf.signature_help()<cr>
 map <leader>. <cmd>lua vim.lsp.buf.code_action()<cr>
 map <leader><leader>t <cmd>TroubleToggle<cr>
 map <leader>s <cmd>tab split<cr>
+map <leader>w <cmd>set wrap!<cr>
 
 lua <<EOF
 
@@ -136,6 +137,8 @@ require("nvim-tree").setup {
     always_show_folders = false, -- Turn into false from true by default
   }
 }
+
+vim.g.copilot_assume_mapped = true
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -218,7 +221,12 @@ require'lspconfig'.purescriptls.setup {
   on_attach = on_attach,
   settings = {
     purescript = {
-      addSpagoSources = true -- e.g. any purescript language-server config here
+      addSpagoSources = true, -- e.g. any purescript language-server config here
+      censorWarnings = {
+        "ImplicitQualifiedImport",
+        "WildcardInferredType",
+        "ScopeShadowing"
+      }
     }
   },
   flags = {
