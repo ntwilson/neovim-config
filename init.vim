@@ -14,6 +14,7 @@ Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'github/copilot.vim'
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'deoplete-plugins/deoplete-lsp'
+Plug 'jeetsukumaran/vim-indentwise'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -244,6 +245,9 @@ EOF
 "
 let g:fsharp#lsp_auto_setup = 0
 let g:fsharp#exclude_project_directories = ['paket-files']
+" let g:fsharp#enable_reference_code_lens = 0
+" let g:fsharp#lsp_codelens = 0
+" let g:fsharp#linter = 0
 
 let g:purescript_disable_indent = 1
 let g:purescript_unicode_conceal_enable = 0
