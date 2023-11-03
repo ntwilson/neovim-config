@@ -2,26 +2,26 @@
 " source $VIMRUNTIME/vimrc_example.vim
 
 call plug#begin()
-Plug 'phaazon/hop.nvim'
-Plug 'tpope/vim-surround'
+Plug 'phaazon/hop.nvim', {'tag' : '*'}
+Plug 'tpope/vim-surround', {'tag' : '*'}
 Plug 'BurntSushi/ripgrep'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-lua/plenary.nvim', {'tag' : '*'}
+Plug 'nvim-telescope/telescope.nvim', {'tag' : '*'}
 Plug 'nvim-telescope/telescope-file-browser.nvim'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-treesitter/nvim-treesitter', {'tag' : '*'}
+Plug 'nvim-tree/nvim-tree.lua', {'tag' : '*'}
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-Plug 'github/copilot.vim'
+Plug 'github/copilot.vim', {'tag' : '*'}
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'deoplete-plugins/deoplete-lsp'
-Plug 'jeetsukumaran/vim-indentwise'
+Plug 'jeetsukumaran/vim-indentwise', {'tag' : '*'}
 
-Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig', {'tag' : '*'}
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/nvim-cmp', {'tag' : '*'}
 
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
@@ -29,12 +29,12 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'ionide/Ionide-vim'
 Plug 'ncm2/float-preview.nvim'
 
-Plug 'purescript-contrib/purescript-vim'
-Plug 'nvim-tree/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
-Plug 'chrisbra/unicode.vim'
+Plug 'purescript-contrib/purescript-vim', {'tag' : '*'}
+Plug 'nvim-tree/nvim-web-devicons', {'tag' : '*'}
+Plug 'folke/trouble.nvim', {'tag' : '*'}
+Plug 'chrisbra/unicode.vim', {'tag' : '*'}
 
-Plug 'kosayoda/nvim-lightbulb'
+Plug 'kosayoda/nvim-lightbulb', {'tag' : '*'}
 Plug 'antoinemadec/FixCursorHold.nvim'
 
 " Plug 'nyoom-engineering/oxocarbon.nvim'
