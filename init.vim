@@ -237,6 +237,8 @@ require'lspconfig'.purescriptls.setup {
 
 require('nvim-lightbulb').setup({autocmd = {enabled = true}})
 
+-- vim.lsp.set_log_level("debug")
+
 EOF
 
 " let g:deoplete#enable_at_startup = 1
@@ -251,7 +253,6 @@ let g:fsharp#exclude_project_directories = ['paket-files']
 
 let g:purescript_disable_indent = 1
 let g:purescript_unicode_conceal_enable = 0
-
 
 
 " Use the internal diff if available.
