@@ -34,7 +34,9 @@ Plug 'nvim-tree/nvim-web-devicons', {'tag' : '*'}
 Plug 'folke/trouble.nvim', {'tag' : '*'}
 Plug 'chrisbra/unicode.vim', {'tag' : '*'}
 
-Plug 'kosayoda/nvim-lightbulb', {'tag' : '*'}
+Plug 'nvim-lualine/lualine.nvim', {'tag' : '*'}
+
+" Plug 'kosayoda/nvim-lightbulb', {'tag' : '*'}
 Plug 'antoinemadec/FixCursorHold.nvim'
 
 " Plug 'nyoom-engineering/oxocarbon.nvim'
@@ -97,16 +99,17 @@ map <C-k> <C-w>k
 tmap <C-j> <C-\><C-n><C-w>j
 tmap <C-k> <C-\><C-n><C-w>k
 
-set updatetime=2000
-au CursorHold * :update
+" set updatetime=2000
+" au CursorHold * :update
 
 " Find files using Telescope command-line sugar
 "
-map <leader>ff <cmd>Telescope find_files hidden=true<cr>
+map <leader>ff <cmd>Telescope find_files find_command=rg,--hidden,--files,--no-ignore-vcs,--iglob,!**/bin/,--iglob,!**/obj/,--iglob,!.venv/,--iglob,!.git/,--iglob,!packages/,--iglob,!.spago/,--iglob,!*.html<cr>
 map <leader>fg <cmd>Telescope live_grep hidden=true<cr>
 map <leader>fb <cmd>Telescope buffers hidden=true<cr>
 map <leader>fh <cmd>Telescope help_tags hidden=true<cr>
 map <leader>fe <cmd>Telescope file_browser hidden=true<cr>
+map <leader>fs <cmd>Telescope grep_string<cr>
 map <leader>fd <cmd>NvimTreeToggle<cr>
 
 map K <cmd>lua vim.lsp.buf.hover()<cr>
@@ -117,7 +120,14 @@ map gs <cmd>lua vim.lsp.buf.signature_help()<cr>
 map <leader>. <cmd>lua vim.lsp.buf.code_action()<cr>
 map <leader><leader>t <cmd>TroubleToggle<cr>
 map <leader>s <cmd>tab split<cr>
-map <leader>w <cmd>set wrap!<cr>
+map <leader>ww <cmd>set wrap!<cr>
+
+map <leader>lf <cmd>!dotnet fantomas %<cr>
+map <leader>lp <cmd>!pdm run format %<cr>
+
+map <leader>wf <cmd>write<cr><cmd>!dotnet fantomas %<cr><cmd>edit<cr>
+map <leader>wpy <cmd>write<cr><cmd>!pdm run format %<cr><cmd>edit<cr>
+map <leader>wps <cmd>write<cr><cmd>!npx purs-tidy format-in-place %<cr><cmd>edit<cr>
 
 lua <<EOF
 
@@ -131,7 +141,22 @@ require("toggleterm").setup{
   shell = vim.o.shell
 }
 
-require("telescope").load_extension "file_browser"
+local telescope = require("telescope")
+telescope.load_extension "file_browser"
+
+-- require("telescope.builtin").find_files {
+--   find_command = { 'rg', '--files', '--hidden', '--no-ignore-vcs', '--iglob', '!.git', '!bin', '!obj' }
+-- }
+
+telescope.setup {
+  pickers = {
+    find_files = { 
+      hidden = true,
+    }
+  }
+}
+
+
 require("nvim-tree").setup {
   live_filter = {
     prefix = "[FILTER]: ",
@@ -143,6 +168,15 @@ vim.g.copilot_assume_mapped = true
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+require('lualine').setup {
+  options = { 
+    theme = 'ayu_mirage',
+    section_separators = { left = '', right = '' },
+  }
+  -- options = { theme = 'palenight' }
+  -- options = { theme = 'wombat' }
+}
 
 -- Set up nvim-cmp.
 local cmp = require'cmp'
@@ -213,7 +247,7 @@ local setup = function(server)
   }
 end
 local lspconfig = require('lspconfig')
-setup(require('ionide'))
+require('ionide').setup { } 
 
 require'lspconfig'.purescriptls.setup {
   -- Your personal on_attach function referenced before to include
@@ -235,7 +269,7 @@ require'lspconfig'.purescriptls.setup {
   }
 }
 
-require('nvim-lightbulb').setup({autocmd = {enabled = true}})
+-- require('nvim-lightbulb').setup({autocmd = {enabled = true}})
 
 -- vim.lsp.set_log_level("debug")
 
