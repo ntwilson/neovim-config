@@ -39,6 +39,8 @@ Plug 'nvim-lualine/lualine.nvim', {'tag' : '*'}
 " Plug 'kosayoda/nvim-lightbulb', {'tag' : '*'}
 Plug 'antoinemadec/FixCursorHold.nvim'
 
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
 " Plug 'nyoom-engineering/oxocarbon.nvim'
 " Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 " Plug 'ellisonleao/gruvbox.nvim'
@@ -48,6 +50,7 @@ call plug#end()
 
 
 set splitbelow
+set noshowmode
 
 set number
 set ignorecase
@@ -104,7 +107,7 @@ tmap <C-k> <C-\><C-n><C-w>k
 
 " Find files using Telescope command-line sugar
 "
-map <leader>ff <cmd>Telescope find_files find_command=rg,--hidden,--files,--no-ignore-vcs,--iglob,!**/bin/,--iglob,!**/obj/,--iglob,!.venv/,--iglob,!.git/,--iglob,!packages/,--iglob,!.spago/,--iglob,!*.html<cr>
+map <leader>ff <cmd>Telescope find_files find_command=rg,--hidden,--files,--no-ignore-vcs,--iglob,!**/bin/,--iglob,!**/obj/,--iglob,!.venv/,--iglob,!.git/,--iglob,!packages/,--iglob,!node_modules/,--iglob,!.spago/,--iglob,!*.html,--iglob,!output/**/*.js,--iglob,!output/**/*.js.map,--iglob,!output/**/*.cbor<cr>
 map <leader>fg <cmd>Telescope live_grep hidden=true<cr>
 map <leader>fb <cmd>Telescope buffers hidden=true<cr>
 map <leader>fh <cmd>Telescope help_tags hidden=true<cr>
@@ -176,6 +179,12 @@ require('lualine').setup {
   }
   -- options = { theme = 'palenight' }
   -- options = { theme = 'wombat' }
+}
+
+vim.g.firenvim_config = { 
+  localSettings = {
+    ['.*'] = { takeover = 'never' }
+  }
 }
 
 -- Set up nvim-cmp.
