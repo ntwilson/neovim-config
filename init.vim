@@ -12,6 +12,10 @@ Plug 'nvim-treesitter/nvim-treesitter', {'tag' : '*'}
 Plug 'nvim-tree/nvim-tree.lua', {'tag' : '*'}
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'github/copilot.vim', {'tag' : '*'}
+
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'tag': '*' }
+
+
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'jeetsukumaran/vim-indentwise', {'tag' : '*'}
@@ -132,6 +136,8 @@ map <leader>wf <cmd>write<cr><cmd>!dotnet fantomas %<cr><cmd>edit<cr>
 map <leader>wpy <cmd>write<cr><cmd>!pdm run format %<cr><cmd>edit<cr>
 map <leader>wps <cmd>write<cr><cmd>!npx purs-tidy format-in-place %<cr><cmd>edit<cr>
 
+map <leader>cct <cmd>CopilotChatToggle<cr>
+
 lua <<EOF
 
 require("hop").setup { keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 }
@@ -168,6 +174,17 @@ require("nvim-tree").setup {
 }
 
 vim.g.copilot_assume_mapped = true
+
+
+require("CopilotChat").setup {
+  window = {
+    layout = 'float', 
+    width = 0.75, -- fractional width of parent, or absolute width in columns when > 1
+    height = 0.75, -- fractional height of parent, or absolute height in rows when > 1
+  }
+  -- See Configuration section for rest
+}
+
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
