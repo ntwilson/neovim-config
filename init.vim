@@ -98,6 +98,7 @@ map <Leader><Leader>j <cmd>HopLineAC<cr>
 map <Leader><Leader>k <cmd>HopLineBC<cr>
 map <Leader>tt <cmd>ToggleTerm direction=horizontal<cr>
 map <Leader>to <cmd>ToggleTerm direction=float<cr>
+map <Leader>tn <cmd>tabnew +term<cr>
 nnoremap <leader>ts <cmd>ToggleTermSendCurrentLine 1<cr>
 vnoremap <leader>ts <cmd>ToggleTermSendVisualSelection 1<cr>
 tmap <esc> <C-\><C-n>
