@@ -137,7 +137,7 @@ map <leader>wf <cmd>write<cr><cmd>!dotnet fantomas %<cr><cmd>edit<cr>
 map <leader>wpy <cmd>write<cr><cmd>!pdm run format %<cr><cmd>edit<cr>
 map <leader>wps <cmd>write<cr><cmd>!npx purs-tidy format-in-place %<cr><cmd>edit<cr>
 
-map <leader>cct <cmd>CopilotChatToggle<cr>
+map <leader>cc <cmd>CopilotChatToggle<cr>
 
 lua <<EOF
 
@@ -308,8 +308,8 @@ EOF
 "
 let g:fsharp#lsp_auto_setup = 0
 let g:fsharp#exclude_project_directories = ['paket-files']
-" let g:fsharp#enable_reference_code_lens = 0
-" let g:fsharp#lsp_codelens = 0
+let g:fsharp#enable_reference_code_lens = 0
+let g:fsharp#lsp_codelens = 0
 " let g:fsharp#linter = 0
 
 let g:purescript_disable_indent = 1
