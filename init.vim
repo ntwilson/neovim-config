@@ -35,7 +35,7 @@ Plug 'ncm2/float-preview.nvim'
 
 Plug 'purescript-contrib/purescript-vim', {'tag' : '*'}
 Plug 'nvim-tree/nvim-web-devicons', {'tag' : '*'}
-Plug 'folke/trouble.nvim', {'tag' : '*'}
+Plug 'folke/trouble.nvim', {'tag' : '*'} " {'tag' : 'v2.10.0'}
 Plug 'chrisbra/unicode.vim', {'tag' : '*'}
 
 Plug 'nvim-lualine/lualine.nvim', {'tag' : '*'}
@@ -126,7 +126,7 @@ map gd <cmd>lua vim.lsp.buf.definition()<cr>
 map gh <cmd>lua vim.lsp.buf.type_definition()<cr>
 map gs <cmd>lua vim.lsp.buf.signature_help()<cr>
 map <leader>. <cmd>lua vim.lsp.buf.code_action()<cr>
-map <leader><leader>t <cmd>TroubleToggle<cr>
+map <leader><leader>t <cmd>Trouble toggle diagnostics<cr>
 map <leader>s <cmd>tab split<cr>
 map <leader>ww <cmd>set wrap!<cr>
 
@@ -140,6 +140,8 @@ map <leader>wps <cmd>write<cr><cmd>!npx purs-tidy format-in-place %<cr><cmd>edit
 map <leader>cc <cmd>CopilotChatToggle<cr>
 
 lua <<EOF
+
+require("trouble").setup { }
 
 require("hop").setup { keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 }
 
@@ -276,7 +278,9 @@ end
 local lspconfig = require('lspconfig')
 require('ionide').setup { } 
 
-require'lspconfig'.purescriptls.setup {
+lspconfig.pyright.setup { }
+
+lspconfig.purescriptls.setup {
   -- Your personal on_attach function referenced before to include
   -- keymaps & other ls options
   autostart = true,
