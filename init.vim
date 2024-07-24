@@ -6,7 +6,9 @@ Plug 'phaazon/hop.nvim', {'tag' : '*'}
 Plug 'tpope/vim-surround', {'tag' : '*'}
 Plug 'BurntSushi/ripgrep'
 Plug 'nvim-lua/plenary.nvim', {'tag' : '*'}
-Plug 'nvim-telescope/telescope.nvim', {'tag' : '*'}
+
+" using '0.1.x' according to https://github.com/nvim-telescope/telescope.nvim/issues/3178
+Plug 'nvim-telescope/telescope.nvim', {'tag' : '0.1.x'}
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'tag' : '*'}
 Plug 'nvim-tree/nvim-tree.lua', {'tag' : '*'}
