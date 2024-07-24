@@ -179,6 +179,10 @@ require("nvim-tree").setup {
   }
 }
 
+vim.keymap.set('i', '<C-A>', 'copilot#Accept("")', {
+  expr = true,
+  replace_keycodes = false
+})
 vim.g.copilot_assume_mapped = true
 
 
