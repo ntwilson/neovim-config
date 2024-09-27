@@ -103,7 +103,7 @@ map <Leader>tt <cmd>ToggleTerm direction=horizontal<cr>
 map <Leader>to <cmd>ToggleTerm direction=float<cr>
 map <Leader>tn <cmd>tabnew +term<cr>
 nnoremap <leader>ts <cmd>ToggleTermSendCurrentLine 1<cr>
-vnoremap <leader>ts <cmd>ToggleTermSendVisualSelection 1<cr>
+vnoremap <leader>ts <cmd>ToggleTermSendVisualLines 1<cr>
 tmap <esc> <C-\><C-n>
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -305,6 +305,10 @@ lspconfig.purescriptls.setup {
   flags = {
     debounce_text_changes = 150,
   }
+}
+
+lspconfig.powershell_es.setup{
+  bundle_path = '~/.pwsh-es',
 }
 
 -- require('nvim-lightbulb').setup({autocmd = {enabled = true}})
