@@ -82,6 +82,8 @@ set secure
 set encoding=utf-8
 colorscheme slate
 
+filetype indent off
+
 set shell=pwsh
 
 if has("win32")
